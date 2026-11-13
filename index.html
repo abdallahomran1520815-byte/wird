@@ -103,10 +103,10 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .label b{font-size:28px;line-height:1.2}
 .badge{font-size:16px;line-height:1;padding:4px 10px;border-radius:99px;background:var(--on);color:var(--c);font-weight:700}
 .body{flex:1;min-width:0;padding:14px 16px;display:flex;flex-direction:column;gap:10px;justify-content:center}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:4px 14px 8px;border-radius:99px;border:2px solid var(--c);background:var(--surface);color:var(--i);font-weight:700;font-size:21px;line-height:1.3}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.chip{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:100%;min-height:64px;padding:6px 26px 10px;text-align:center;border-radius:18px;border:2px solid var(--c);background:var(--surface);color:var(--i);font-weight:700;font-size:21px;line-height:1.35}
 .chip small{font-size:16px;font-weight:400;opacity:.9;white-space:nowrap}
-.chip svg{width:18px;height:18px;flex:none;display:none}
+.chip svg{position:absolute;top:8px;inset-inline-start:8px;width:16px;height:16px;display:none}
 .chip::after{content:"";position:absolute;inset:auto 0 0 auto;height:5px;width:var(--p,0%);background:var(--c)}
 .chip.full{background:var(--c);color:var(--on)}
 .chip.full svg{display:block}
@@ -131,11 +131,34 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .backup summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .backup .inner{display:flex;flex-direction:column;gap:10px;padding:4px 0 14px;font-size:19px;color:var(--muted)}
 .backup p{margin:0}
+.backup input[type=text]{width:100%;min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg);padding:6px 12px;font:inherit;font-size:21px}
+.backup input[type=text]:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.gotoday{align-self:center}
 .backup textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg);padding:10px 12px;font:16px/1.5 ui-monospace,Menlo,Consolas,monospace;direction:ltr;text-align:left;resize:vertical}
 .backup textarea:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
 .backup .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .btn{border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);border-radius:12px;min-height:46px;padding:4px 18px;font-weight:700;font-size:20px}
 .btn.alt{background:var(--surface);color:var(--fg);border-color:var(--line)}
+.tcard{display:flex;flex-direction:column;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px}
+.tc-row{display:flex;flex-direction:column;gap:8px}
+.tc-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tc-head b{font-size:22px}
+.tc-head span{color:var(--muted);font-size:18px}
+.gbar{height:14px;border-radius:99px;background:var(--line);overflow:hidden}
+.gbar i{display:block;height:100%;width:0;border-radius:99px;background:var(--ok);transition:width .3s}
+.tc-goal{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:18px}
+.step{display:flex;align-items:center;gap:8px}
+.step button{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);font-size:26px;font-weight:700;line-height:1;padding:0}
+.step output{min-width:86px;text-align:center;color:var(--fg);font-weight:700}
+.cont{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:right;border:0;border-radius:16px;padding:12px 16px;background:var(--accent);color:var(--on-accent)}
+.cont b{display:block;font-size:24px;line-height:1.4}
+.cont small{display:block;font-size:17px;opacity:.85}
+.cont svg{width:26px;height:26px;flex:none}
+.kbanner{display:flex;flex-direction:column;gap:10px;align-items:stretch;text-align:center;border-radius:16px;padding:14px;background:var(--gold);color:#3A2A00}
+.kbanner b{font-size:24px}
+.kbanner .btn{background:#3A2A00;border-color:#3A2A00;color:#FBF8F1}
+.kcount{color:var(--muted);font-size:18px;text-align:center}
+#detail .pg.cur{outline:3px solid var(--gold);outline-offset:2px}
 #msg{color:var(--fg);font-weight:700}
 .warn{background:var(--d3t);color:var(--d3i);border-radius:12px;padding:8px 12px}
 .note{margin:0;text-align:center;color:var(--muted);font-size:17px}
@@ -144,20 +167,63 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .reset button.danger{border-color:var(--d4);color:var(--d4i);font-weight:700}
 @media (max-width:420px){
   .pct{width:56px;height:56px;font-size:21px}
-  .label{width:88px}.label b{font-size:24px}.chip{font-size:19px;padding:4px 12px 8px}
+  .label{width:88px}.label b{font-size:24px}.chip{font-size:19px;padding:6px 22px 10px}
   .pg{min-width:44px;font-size:19px}
 }
 @media (prefers-reduced-motion:reduce){.bar>i{transition:none}}
+
+:root{--ok:#1E7F43;--on-ok:#FFFFFF;--part:#D9730D;--part-t:#FDECD6;--tile:#EEF3EF;--track:#DDE5E0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ok:#4ADE80;--on-ok:#0B1A10;--part:#FB923C;--part-t:#3A2A15;--tile:#1B2825;--track:#2A3836}}
+:root[data-theme="dark"]{--ok:#4ADE80;--on-ok:#0B1A10;--part:#FB923C;--part-t:#3A2A15;--tile:#1B2825;--track:#2A3836}
+[hidden]{display:none!important}
+.tabs.three{grid-template-columns:repeat(3,1fr)}
+.tabs.three .tab{min-height:50px}
+.tabs.three .tab b{font-size:22px}
+.sumcard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+.sumlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.sumlist li{display:flex;justify-content:space-between;gap:10px;font-size:21px;line-height:1.7}
+.sumlist li span{color:var(--muted)}
+.sumlist li b{font-weight:700}
+.donut{display:flex;flex-direction:column;align-items:center;gap:6px}
+.donutsvg{width:min(180px,100%);height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:2px 12px;justify-content:center;font-size:16px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.tiles{display:grid;gap:8px}
+.tiles.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tiles.s5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.tile{position:relative;overflow:hidden;min-height:74px;border-radius:16px;border:1px solid var(--line);background:var(--tile);color:var(--fg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 2px 10px;font-weight:700;font-size:22px;line-height:1.3;text-align:center}
+.tile small{font-size:14px;font-weight:400;color:var(--muted)}
+.tile span{max-width:100%;white-space:nowrap;overflow:hidden}
+.tiles.s4 .tile span{font-size:19px}
+.tile.part{background:var(--part-t)}
+.tile.part::after{content:"";position:absolute;inset:auto 0 0 auto;height:6px;width:var(--p,0%);background:var(--part)}
+.tile.full{background:var(--ok);color:var(--on-ok);border-color:var(--ok)}
+.tile.full small{color:var(--on-ok);opacity:.85}
+.dbar{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.dbar h2{margin:0;font-size:32px;line-height:1.3;font-weight:700}
+.back{width:48px;height:48px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);display:flex;align-items:center;justify-content:center;flex:none}
+.back svg{width:24px;height:24px}
+.dsum{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;color:var(--muted);font-size:19px;margin-bottom:6px}
+.gh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--line);padding:14px 4px 6px;margin-bottom:10px}
+.gh b{font-size:24px}
+.gh span{color:var(--muted);font-size:18px}
+#detail .pgs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+#detail .pg{min-width:0;min-height:58px;border:1px solid var(--line);background:var(--tile);color:var(--fg);font-size:23px;border-radius:14px}
+#detail .pg[aria-pressed="true"]{background:var(--ok);color:var(--on-ok);border-color:var(--ok)}
+#detail .pg.js{padding-top:14px}
+.view-gap{display:flex;flex-direction:column;gap:14px}
 </style>
 
 </head>
 <body>
 <div class="app" dir="rtl" lang="ar">
+<div id="mainWrap" class="view-gap">
   <header class="hero">
     <div class="ttl">
       <h1>الورد اليومي للقرآن الكريم</h1>
       <div class="div" aria-hidden="true"><i></i><svg viewBox="0 0 20 20"><rect x="4" y="4" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="4" y="4" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4" transform="rotate(45 10 10)"/><circle cx="10" cy="10" r="1.8" fill="currentColor"/></svg><i></i></div>
-      <div class="who">عبدالله عمران</div>
+      <div class="who" id="who">عبدالله عمران</div>
     </div>
     <div class="prog">
       <div class="bar" role="progressbar" aria-label="التقدم الكلي" aria-valuemin="0" aria-valuemax="100" id="bar"><i id="barfill" style="width:0"></i></div>
@@ -166,22 +232,39 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
     <div class="hero-meta"><span id="m-pages"></span><span id="m-days"></span></div>
   </header>
 
-  <section class="juz" aria-label="تقدم الأجزاء">
-    <div class="jh"><span>الأجزاء</span><small id="jsum"></small></div>
-    <div class="jg" id="jg"></div>
-  </section>
-
-  <div class="tabs" role="tablist" aria-label="الأسبوع">
-    <button class="tab" role="tab" id="tab0" aria-selected="true" data-week="0"><b>الأسبوع الأول</b><small id="t0"></small></button>
-    <button class="tab" role="tab" id="tab1" aria-selected="false" data-week="1"><b>الأسبوع الثاني</b><small id="t1"></small></button>
+  <div class="tabs" role="tablist" aria-label="القسم">
+    <button class="tab" role="tab" id="vtab-plan" aria-selected="true" data-act="view" data-view="plan"><b>الجدول</b><small>ورد الأسبوعين</small></button>
+    <button class="tab" role="tab" id="vtab-stats" aria-selected="false" data-act="view" data-view="stats"><b>الحصيلة</b><small id="vs-sub"></small></button>
   </div>
 
-  <main class="days" id="days" role="tabpanel"></main>
+  <div id="planView" class="view-gap">
+    <section class="tcard" id="tcard" aria-label="ورد اليوم"></section>
+    <div class="tabs" role="tablist" aria-label="الأسبوع">
+      <button class="tab" role="tab" id="tab0" aria-selected="true" data-act="week" data-week="0"><b>الأسبوع الأول</b><small id="t0"></small></button>
+      <button class="tab" role="tab" id="tab1" aria-selected="false" data-act="week" data-week="1"><b>الأسبوع الثاني</b><small id="t1"></small></button>
+    </div>
+    <main class="days" id="days"></main>
+    <button class="btn alt gotoday" data-act="today">اذهب لورد اليوم</button>
+  </div>
 
-  <p class="note">اضغط على السورة لتظهر صفحاتها، وعلّم الصفحات اللي قرأتها. الترقيم حسب المصحف المدني (٦٠٤ صفحة).</p>
+  <div id="statsView" class="view-gap" hidden>
+    <section class="sumcard" id="sumcard"></section>
+    <div class="tabs three" role="tablist" aria-label="عرض الحصيلة">
+      <button class="tab" role="tab" id="stab-surah" data-act="sub" data-sub="surah"><b>سور</b></button>
+      <button class="tab" role="tab" id="stab-hizb" data-act="sub" data-sub="hizb"><b>أحزاب</b></button>
+      <button class="tab" role="tab" id="stab-juz" data-act="sub" data-sub="juz"><b>أجزاء</b></button>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <p class="note">الأخضر: خلصت كل صفحاته. البرتقالي: بدأت فيه. اضغط على أي مربع لتظهر صفحاته وتعلّم المقروء. حدود الأحزاب والأجزاء حسب المصحف المدني وقد تختلف بصفحة في مصحفك.</p>
+  </div>
+
+  <p class="note">الترقيم حسب المصحف المدني (٦٠٤ صفحة).</p>
   <details class="backup">
-    <summary>حفظ التقدم واستعادته</summary>
+    <summary>الإعدادات والنسخ الاحتياطي</summary>
     <div class="inner">
+      <label for="nameInput"><b>الاسم الظاهر في أعلى الصفحة</b></label>
+      <input type="text" id="nameInput" maxlength="40" placeholder="اكتب اسمك" autocomplete="off">
+      <div class="row"><button class="btn" data-act="share">مشاركة التطبيق</button></div>
       <p id="storeinfo"></p>
       <p>للاحتفاظ بنسخة أو نقل تقدمك لجهاز تاني: انسخ الكود ده واحفظه في ملاحظاتك.</p>
       <textarea id="code" readonly aria-label="كود التقدم" rows="3"></textarea>
@@ -192,6 +275,13 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
     </div>
   </details>
   <div class="reset" id="reset"></div>
+</div>
+
+<section id="detail" hidden>
+  <div class="dbar"><button class="back" data-act="back" aria-label="رجوع"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><h2 id="dtitle"></h2></div>
+  <div class="dsum"><span id="dprog"></span><button class="btn alt" data-act="dall" id="dall"></button></div>
+  <div id="dbody"></div>
+</section>
 </div>
 
 <script>
@@ -216,154 +306,245 @@ var PLAN = [
   null
  ]
 ];
-/* صفحة بداية كل سورة في المصحف المدني (٦٠٤ صفحة) */
 var ST=[['الفاتحة',1],['البقرة',2],['آل عمران',50],['النساء',77],['المائدة',106],['الأنعام',128],['الأعراف',151],['الأنفال',177],['التوبة',187],['يونس',208],['هود',221],['يوسف',235],['الرعد',249],['إبراهيم',255],['الحجر',262],['النحل',267],['الإسراء',282],['الكهف',293],['مريم',305],['طه',312],['الأنبياء',322],['الحج',332],['المؤمنون',342],['النور',350],['الفرقان',359],['الشعراء',367],['النمل',377],['القصص',385],['العنكبوت',396],['الروم',404],['لقمان',411],['السجدة',415],['الأحزاب',418],['سبأ',428],['فاطر',434],['يس',440],['الصافات',446],['ص',453],['الزمر',458],['غافر',467],['فصلت',477],['الشورى',483],['الزخرف',489],['الدخان',496],['الجاثية',499],['الأحقاف',502],['محمد',507],['الفتح',511],['الحجرات',515],['ق',518],['الذاريات',520],['الطور',523],['النجم',526],['القمر',528],['الرحمن',531],['الواقعة',534],['الحديد',537],['المجادلة',542],['الحشر',545],['الممتحنة',549],['الصف',551],['الجمعة',553],['المنافقون',554],['التغابن',556],['الطلاق',558],['التحريم',560],['الملك',562],['القلم',564],['الحاقة',566],['المعارج',568],['نوح',570],['الجن',572],['المزمل',574],['المدثر',575],['القيامة',577],['الإنسان',578],['المرسلات',580],['النبأ',582],['النازعات',583],['عبس',585],['التكوير',586],['الانفطار',587],['المطففين',587],['الانشقاق',589],['البروج',590],['الطارق',591],['الأعلى',591],['الغاشية',592],['الفجر',593],['البلد',594],['الشمس',595],['الليل',595],['الضحى',596],['الشرح',596],['التين',597],['العلق',597],['القدر',598],['البينة',598],['الزلزلة',599],['العاديات',599],['القارعة',600],['التكاثر',600],['العصر',601],['الهمزة',601],['الفيل',601],['قريش',602],['الماعون',602],['الكوثر',602],['الكافرون',603],['النصر',603],['المسد',603],['الإخلاص',604],['الفلق',604],['الناس',604]];
 var START={}, NEXT={};
 for (var q=0;q<ST.length;q++){ START[ST[q][0]]=ST[q][1]; NEXT[ST[q][0]]=q+1<ST.length?ST[q+1][1]:605; }
 function endPage(name){ return Math.max(START[name], NEXT[name]-1); }
-/* صفحة بداية كل جزء (١–٣٠) في المصحف المدني */
 var JS=[0,1,22,42,62,82,102,121,142,162,182,201,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582];
 var JSTART={}; for (var jj=1;jj<=30;jj++) JSTART[JS[jj]]=jj;
-function juzOf(p){ var j=1; for (var k=1;k<=30;k++) if (JS[k]<=p) j=k; return j; }
-function juzLabel(a,b){ var x=juzOf(a), y=juzOf(b); return x===y ? 'الجزء '+n(x) : 'الأجزاء '+n(x)+' – '+n(y); }
-function juzStats(){
-  var out=[];
-  for (var j=1;j<=30;j++){ var s=JS[j], e=j<30?JS[j+1]-1:604, c=0; for (var p=s;p<=e;p++) if (state.pages[p]) c++; out.push({done:c,total:e-s+1}); }
-  return out;
+/* بداية كل حزب (١–٦٠) في المصحف المدني */
+var HZ=[0,1,11,22,32,42,51,62,72,82,92,102,111,121,132,142,151,162,173,182,192,201,212,222,231,242,252,262,272,282,292,302,312,322,332,342,352,362,371,382,392,402,413,422,431,442,451,462,472,482,491,502,513,522,531,542,553,562,572,582,592];
+var PH=[], PJ=[], hh=1, jx=1;
+for (var pp=1;pp<=604;pp++){ while(hh<60 && HZ[hh+1]<=pp) hh++; while(jx<30 && JS[jx+1]<=pp) jx++; PH[pp]=hh; PJ[pp]=jx; }
+function rangeOf(type,id){
+  if (type==='surah') return [START[id], endPage(id)];
+  if (type==='hizb') return [HZ[id], id<60?HZ[id+1]-1:604];
+  return [JS[id], id<30?JS[id+1]-1:604];
 }
+function titleOf(type,id){ return type==='surah' ? 'سورة '+id : type==='hizb' ? 'الحزب '+n(id) : 'الجزء '+n(id); }
+function juzLabel(a,b){ var x=PJ[a], y=PJ[b]; return x===y ? 'الجزء '+n(x) : 'الأجزاء '+n(x)+' – '+n(y); }
 
+var DEFAULT_NAME = 'عبدالله عمران';
 var KEY = 'wird-quran-v2';
-var state = { pages:{}, week:0 };
-try { var raw = localStorage.getItem(KEY); if (raw) { var p = JSON.parse(raw); if (p && p.pages) state = { pages:p.pages, week:p.week===1?1:0 }; } } catch(e){}
-var openKey = null, confirmReset = false;
-
+var state = { pages:{}, week:0, name:DEFAULT_NAME, view:'plan', sub:'surah', goal:20, khatmas:0, last:0, log:{} };
+try { var raw = localStorage.getItem(KEY); if (raw) { var p0 = JSON.parse(raw); if (p0 && p0.pages) state = { pages:p0.pages, week:p0.week===1?1:0, name:(typeof p0.name==='string'?p0.name:DEFAULT_NAME), view:p0.view==='stats'?'stats':'plan', sub:(p0.sub==='hizb'||p0.sub==='juz')?p0.sub:'surah', goal:(p0.goal>=1&&p0.goal<=200)?Math.round(p0.goal):20, khatmas:(p0.khatmas>=0)?Math.floor(p0.khatmas):0, last:(p0.last>=1&&p0.last<=604)?p0.last:0, log:(p0.log&&typeof p0.log==='object')?p0.log:{} }; } } catch(e){}
+var detail = null, savedY = 0, confirmReset = false;
 var storageOk = false;
 try { localStorage.setItem('wird-test','1'); storageOk = localStorage.getItem('wird-test')==='1'; localStorage.removeItem('wird-test'); } catch(e){}
 try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch(e){}
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){ storageOk = false; } }
-
-/* كود التقدم: ٦٠٤ بت (صفحة لكل بت) ثم base64 */
-function encodeProgress(){
-  var bytes=[], i, b, p;
-  for (i=0;i<76;i++){ b=0; for (var k=0;k<8;k++){ p=i*8+k+1; if (p<=604 && state.pages[p]) b|=(1<<k); } bytes.push(b); }
-  return btoa(String.fromCharCode.apply(null, bytes));
-}
-function decodeProgress(txt){
-  var raw; try { raw=atob(String(txt).replace(/\s+/g,'')); } catch(e){ return null; }
-  if (raw.length!==76) return null;
-  var pages={}; for (var i=0;i<76;i++){ var b=raw.charCodeAt(i); for (var k=0;k<8;k++){ var p=i*8+k+1; if (p<=604 && (b&(1<<k))) pages[p]=1; } }
-  return pages;
-}
-function say(t){ var m=document.getElementById('msg'); if(m) m.textContent=t; }
 function n(x){ return Number(x).toLocaleString('ar-EG'); }
 function todayIdx(){ return (new Date().getDay()+1)%7; }
+function say(t){ var m=document.getElementById('msg'); if(m) m.textContent=t; }
 var CHECK = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-function surahStat(name){
-  var s=START[name], e=endPage(name), c=0;
-  for (var p=s;p<=e;p++) if (state.pages[p]) c++;
-  return { done:c, total:e-s+1 };
+function count(r){ var c=0; for (var p=r[0];p<=r[1];p++) if (state.pages[p]) c++; return { done:c, total:r[1]-r[0]+1 }; }
+function dayKey(){ var d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+function bump(delta){
+  if (!delta) return;
+  var k=dayKey(); state.log[k]=Math.max(0,(state.log[k]||0)+delta);
+  var ks=Object.keys(state.log); if (ks.length>60){ ks.sort(function(a,b){ var x=a.split('-'),y=b.split('-'); return new Date(+x[0],x[1]-1,x[2])-new Date(+y[0],y[1]-1,y[2]); }); for (var i=0;i<ks.length-60;i++) delete state.log[ks[i]]; }
 }
+function setRange(r,on){ var d=0; for (var p=r[0];p<=r[1];p++){ var had=!!state.pages[p]; if (on&&!had){ state.pages[p]=1; d++; } else if (!on&&had){ delete state.pages[p]; d--; } } bump(d); if (on&&d>0) state.last=r[1]; }
+function toggleOne(p){ if (state.pages[p]){ delete state.pages[p]; bump(-1); } else { state.pages[p]=1; bump(1); state.last=p; } }
+function readCount(){ var c=0; for (var p=1;p<=604;p++) if (state.pages[p]) c++; return c; }
+function surahOfPage(p){ var s=ST[0][0]; for (var i=0;i<ST.length;i++){ if (ST[i][1]<=p) s=ST[i][0]; else break; } return s; }
+function nextUnread(){
+  for (var p=state.last+1;p<=604;p++) if (!state.pages[p]) return p;
+  for (p=1;p<=604;p++) if (!state.pages[p]) return p;
+  return 0;
+}
+var GOALS=[1,2,3,4,5,6,8,10,15,20,25,30,40,50,60,80,100];
+function stepGoal(dir){ var i=0; for (var k=0;k<GOALS.length;k++) if (GOALS[k]<=state.goal) i=k; if (GOALS[i]!==state.goal && dir>0) i=i; else i+=dir; i=Math.max(0,Math.min(GOALS.length-1,i)); state.goal=GOALS[i]; }
+var CHEV='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function todayCardHtml(){
+  var done=readCount(), np=nextUnread();
+  var s='';
+  if (done>=604){
+    s+='<div class="kbanner"><b>ما شاء الله! ختمت المصحف كله</b><button class="btn" data-act="newk">ابدأ ختمة جديدة</button></div>';
+  } else if (np){
+    var sn=surahOfPage(np);
+    s+='<button class="cont" data-act="cont" data-p="'+np+'"><span><b>'+(state.last?'كمّل من صفحة '+n(np):'ابدأ من صفحة '+n(np))+'</b><small>سورة '+sn+' • '+juzLabel(np,np)+'</small></span>'+CHEV+'</button>';
+  }
+  s+='<div class="kcount">الختمات المكتملة: '+n(state.khatmas)+(done<604?' • الحالية: '+n(done)+'/٦٠٤':'')+'</div>';
+  return s;
+}
+function surahStat(name){ return count(rangeOf('surah',name)); }
 function dayStat(list){
   var seen={}, total=0, done=0, full=0;
   for (var i=0;i<list.length;i++){
     var st=surahStat(list[i]); if (st.done===st.total) full++;
     for (var p=START[list[i]]; p<=endPage(list[i]); p++){ if(!seen[p]){ seen[p]=1; total++; if(state.pages[p]) done++; } }
   }
-  return { done:done, total:total, surahs:list.length, full:full, complete:full===list.length };
+  return { done:done, total:total, complete:full===list.length };
 }
 function overall(){
   var seen={}, total=0, done=0, days=0, daysDone=0, wk=[{d:0,n:0},{d:0,n:0}];
   for (var w=0;w<2;w++) for (var d=0;d<7;d++){
     var list=PLAN[w][d]; if(!list) continue;
-    days++; wk[w].n++; var ds=dayStat(list); if (ds.complete){ daysDone++; wk[w].d++; }
+    days++; wk[w].n++; if (dayStat(list).complete){ daysDone++; wk[w].d++; }
     for (var i=0;i<list.length;i++) for (var p=START[list[i]]; p<=endPage(list[i]); p++){ if(!seen[p]){ seen[p]=1; total++; if(state.pages[p]) done++; } }
   }
   return { total:total, done:done, days:days, daysDone:daysDone, wk:wk };
 }
-function setPages(list, on){
-  for (var i=0;i<list.length;i++) for (var p=START[list[i]]; p<=endPage(list[i]); p++){ if (on) state.pages[p]=1; else delete state.pages[p]; }
+function allStats(){
+  var R=0, p, i, h, j; for (p=1;p<=604;p++) if (state.pages[p]) R++;
+  var ip={}, sd=0, hd=0, jd=0;
+  for (i=0;i<ST.length;i++){ var r=rangeOf('surah',ST[i][0]), st=count(r); if (st.done===st.total) sd++; else if (st.done>0) for (p=r[0];p<=r[1];p++) if (!state.pages[p]) ip[p]=1; }
+  for (h=1;h<=60;h++){ var c1=count(rangeOf('hizb',h)); if (c1.done===c1.total) hd++; }
+  for (j=1;j<=30;j++){ var c2=count(rangeOf('juz',j)); if (c2.done===c2.total) jd++; }
+  return { R:R, O:Object.keys(ip).length, sd:sd, hd:hd, jd:jd };
+}
+function tileHtml(type,id,label,small){
+  var st=count(rangeOf(type,id)), cls='tile'+(st.done===st.total?' full':(st.done?' part':''));
+  return '<button class="'+cls+'" data-act="open" data-type="'+type+'" data-id="'+id+'" style="--p:'+Math.round(st.done/st.total*100)+'%" aria-label="'+titleOf(type,id)+': '+n(st.done)+' من '+n(st.total)+' صفحة">'+(small?'<small>'+small+'</small>':'')+'<span>'+label+'</span></button>';
+}
+function donutHtml(a){
+  var C=2*Math.PI*52, g=a.R/604*C, o=a.O/604*C, pct=Math.round(a.R/604*100);
+  return '<svg class="donutsvg" viewBox="0 0 140 140" role="img" aria-label="المقروء '+n(pct)+'٪ من المصحف"><circle cx="70" cy="70" r="52" fill="none" stroke="var(--track)" stroke-width="22"/><circle cx="70" cy="70" r="52" fill="none" stroke="var(--part)" stroke-width="22" stroke-dasharray="'+o+' '+C+'" stroke-dashoffset="'+(-g)+'" transform="rotate(-90 70 70)"/><circle cx="70" cy="70" r="52" fill="none" stroke="var(--ok)" stroke-width="22" stroke-dasharray="'+g+' '+C+'" transform="rotate(-90 70 70)"/><text x="70" y="70" text-anchor="middle" font-size="26" font-weight="700" fill="var(--fg)" font-family="Amiri,serif">'+n(pct)+'٪</text><text x="70" y="92" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Amiri,serif">المصحف الكامل</text></svg>';
+}
+
+function renderDetail(){
+  var r=rangeOf(detail.type,detail.id), st=count(r);
+  document.getElementById('dtitle').textContent=titleOf(detail.type,detail.id);
+  document.getElementById('dprog').textContent='المقروء '+n(st.done)+' من '+n(st.total)+' صفحة • من ص '+n(r[0])+' إلى ص '+n(r[1])+(detail.type==='surah'?' • '+juzLabel(r[0],r[1]):'');
+  document.getElementById('dall').textContent = st.done===st.total ? 'إلغاء تعليم الكل' : 'علّم الكل';
+  var html='', cur=0;
+  for (var p=r[0];p<=r[1];p++){
+    if (PH[p]!==cur){ if(cur) html+='</div>'; cur=PH[p]; html+='<div class="gh"><b>الحزب '+n(cur)+'</b><span>الصفحات</span></div><div class="pgs">'; }
+    var js=JSTART[p];
+    html+='<button class="pg'+(js?' js':'')+'" data-act="pg" data-p="'+p+'" aria-pressed="'+(!!state.pages[p])+'" aria-label="صفحة '+n(p)+(js?'، بداية الجزء '+n(js):'')+'">'+(js?'<span class="jl">ج'+n(js)+'</span>':'')+n(p)+'</button>';
+  }
+  if (cur) html+='</div>';
+  document.getElementById('dbody').innerHTML=html;
+  if (detail.focus){ var fe=document.querySelector('#detail .pg[data-p="'+detail.focus+'"]'); detail.focus=0; if (fe){ fe.classList.add('cur'); fe.scrollIntoView({block:'center'}); } }
 }
 
 function render(){
-  var w=state.week, t=todayIdx(), o=overall();
+  var main=document.getElementById('mainWrap'), det=document.getElementById('detail');
+  if (detail){ main.hidden=true; det.hidden=false; renderDetail(); return; }
+  main.hidden=false; det.hidden=true;
+  var w=state.week, t=todayIdx(), o=overall(), a=allStats();
   var pct=o.total?Math.round(o.done/o.total*100):0;
   document.getElementById('pct').textContent=n(pct)+'٪';
   document.getElementById('barfill').style.width=pct+'%';
   document.getElementById('bar').setAttribute('aria-valuenow',pct);
   document.getElementById('m-pages').textContent=n(o.done)+' من '+n(o.total)+' صفحة';
   document.getElementById('m-days').textContent=n(o.daysDone)+' من '+n(o.days)+' أيام';
-  document.getElementById('t0').textContent=n(o.wk[0].d)+' من '+n(o.wk[0].n)+' أيام';
-  document.getElementById('t1').textContent=n(o.wk[1].d)+' من '+n(o.wk[1].n)+' أيام';
-  document.getElementById('tab0').setAttribute('aria-selected',w===0);
-  document.getElementById('tab1').setAttribute('aria-selected',w===1);
+  var whoEl=document.getElementById('who'); whoEl.textContent=state.name; whoEl.hidden=!state.name;
+  var ni=document.getElementById('nameInput'); if (document.activeElement!==ni) ni.value=state.name;
+  document.getElementById('vs-sub').textContent=n(a.jd)+' من ٣٠ جزء';
+  var isPlan=state.view==='plan';
+  document.getElementById('vtab-plan').setAttribute('aria-selected',isPlan);
+  document.getElementById('vtab-stats').setAttribute('aria-selected',!isPlan);
+  document.getElementById('planView').hidden=!isPlan;
+  document.getElementById('statsView').hidden=isPlan;
 
-  var html='';
-  for (var d=0; d<7; d++){
-    var list=PLAN[w][d], isToday=d===t;
-    html+='<section class="day'+(isToday?' today':'')+(list?'':' rest')+'" style="--c:var(--d'+d+');--t:var(--d'+d+'t);--i:var(--d'+d+'i)">';
-    html+='<div class="label"><b>'+DAYS[d]+'</b>'+(isToday?'<span class="badge">اليوم</span>':'')+'</div><div class="body">';
-    if(!list){ html+='راحة'; }
-    else {
-      var ds=dayStat(list), openName=null;
-      html+='<div class="chips">';
-      for (var i=0;i<list.length;i++){
-        var key=w+'-'+d+'-'+i, st=surahStat(list[i]), full=st.done===st.total, isOpen=openKey===key;
-        if(isOpen) openName=list[i];
-        html+='<button class="chip'+(full?' full':'')+'" data-k="'+key+'" aria-expanded="'+isOpen+'" style="--p:'+Math.round(st.done/st.total*100)+'%">'+CHECK+'<span>'+list[i]+'</span><small>'+n(st.done)+'/'+n(st.total)+'</small></button>';
+  if (isPlan){
+    document.getElementById('t0').textContent=n(o.wk[0].d)+' من '+n(o.wk[0].n)+' أيام';
+    document.getElementById('t1').textContent=n(o.wk[1].d)+' من '+n(o.wk[1].n)+' أيام';
+    document.getElementById('tab0').setAttribute('aria-selected',w===0);
+    document.getElementById('tab1').setAttribute('aria-selected',w===1);
+    document.getElementById('tcard').innerHTML=todayCardHtml();
+    var html='';
+    for (var d=0; d<7; d++){
+      var list=PLAN[w][d], isToday=d===t;
+      html+='<section class="day'+(isToday?' today':'')+(list?'':' rest')+'" style="--c:var(--d'+d+');--t:var(--d'+d+'t);--i:var(--d'+d+'i)">';
+      html+='<div class="label"><b>'+DAYS[d]+'</b>'+(isToday?'<span class="badge">اليوم</span>':'')+'</div><div class="body">';
+      if(!list){ html+='راحة'; }
+      else {
+        var ds=dayStat(list);
+        html+='<div class="chips">';
+        for (var i=0;i<list.length;i++){
+          var st=surahStat(list[i]), full=st.done===st.total;
+          html+='<button class="chip'+(full?' full':'')+'" data-act="open" data-type="surah" data-id="'+list[i]+'" style="--p:'+Math.round(st.done/st.total*100)+'%">'+CHECK+'<span>'+list[i]+'</span><small>'+n(st.done)+'/'+n(st.total)+'</small></button>';
+        }
+        html+='</div>';
+        html+='<div class="foot"><span class="meta"><span>'+(ds.complete?'تم ورد اليوم':'المقروء '+n(ds.done)+' من '+n(ds.total)+' صفحة')+'</span><span>من ص '+n(START[list[0]])+'</span><span>'+juzLabel(START[list[0]],endPage(list[list.length-1]))+'</span></span>';
+        html+='<button class="all" data-act="all" data-d="'+d+'">'+(ds.complete?'إلغاء تعليم اليوم':'علّم اليوم كله')+'</button></div>';
       }
-      html+='</div>';
-      if(openName){
-        var s=START[openName], e=endPage(openName), st2=surahStat(openName);
-        html+='<div class="panel"><div class="ph"><b>'+openName+'</b><span>من ص '+n(s)+' إلى ص '+n(e)+'</span><span>'+juzLabel(s,e)+'</span><span>المقروء '+n(st2.done)+' من '+n(st2.total)+'</span></div><div class="pgs">';
-        for (var pg=s; pg<=e; pg++) html+='<button class="pg'+(JSTART[pg]?' js':'')+'" data-p="'+pg+'" aria-pressed="'+(!!state.pages[pg])+'" aria-label="صفحة '+n(pg)+(JSTART[pg]?'، بداية الجزء '+n(JSTART[pg]):'')+'">'+(JSTART[pg]?'<span class="jl">ج'+n(JSTART[pg])+'</span>':'')+n(pg)+'</button>';
-        html+='</div><div><button class="all" data-sall="'+openName+'">'+(st2.done===st2.total?'إلغاء تعليم السورة':'علّم السورة كلها')+'</button></div></div>';
-      }
-      html+='<div class="foot"><span class="meta"><span>'+(ds.complete?'تم ورد اليوم':'المقروء '+n(ds.done)+' من '+n(ds.total)+' صفحة')+'</span><span>من ص '+n(START[list[0]])+'</span><span>'+juzLabel(START[list[0]],endPage(list[list.length-1]))+'</span></span>';
-      html+='<button class="all" data-all="'+d+'">'+(ds.complete?'إلغاء تعليم اليوم':'علّم اليوم كله')+'</button></div>';
+      html+='</div></section>';
     }
-    html+='</div></section>';
+    document.getElementById('days').innerHTML=html;
+  } else {
+    document.getElementById('sumcard').innerHTML='<ul class="sumlist"><li><span>الأجزاء</span><b>'+n(a.jd)+' من '+n(30)+'</b></li><li><span>الأحزاب</span><b>'+n(a.hd)+' من '+n(60)+'</b></li><li><span>السور</span><b>'+n(a.sd)+' من '+n(114)+'</b></li><li><span>الصفحات</span><b>'+n(a.R)+' من '+n(604)+'</b></li></ul><div class="donut">'+donutHtml(a)+'<div class="legend"><span><i style="background:var(--ok)"></i>مقروء</span><span><i style="background:var(--part)"></i>جاري</span><span><i style="background:var(--track)"></i>لم يُقرأ</span></div></div>';
+    ['surah','hizb','juz'].forEach(function(k){ document.getElementById('stab-'+k).setAttribute('aria-selected', state.sub===k); });
+    var th='', box=document.getElementById('tiles');
+    if (state.sub==='surah'){ for (var s=0;s<ST.length;s++) th+=tileHtml('surah',ST[s][0],ST[s][0],'سورة'); box.className='tiles s4'; }
+    else if (state.sub==='hizb'){ for (var h=1;h<=60;h++) th+=tileHtml('hizb',h,n(h),''); box.className='tiles s5'; }
+    else { for (var j=1;j<=30;j++) th+=tileHtml('juz',j,n(j),''); box.className='tiles s5'; }
+    box.innerHTML=th;
   }
-  document.getElementById('days').innerHTML=html;
-
-  var js=juzStats(), jf=0, cur=0, jh='';
-  for (var j=1;j<=30;j++){ var st=js[j-1], full=st.done===st.total; if(full) jf++; if(!cur && !full) cur=j; }
-  for (var j2=1;j2<=30;j2++){ var s2=js[j2-1], f2=s2.done===s2.total;
-    jh+='<div class="jz'+(f2?' full':'')+(j2===cur?' cur':'')+'" style="--p:'+Math.round(s2.done/s2.total*100)+'%" title="الجزء '+n(j2)+': '+n(s2.done)+' من '+n(s2.total)+' صفحة">'+n(j2)+'</div>'; }
-  document.getElementById('jg').innerHTML=jh;
-  document.getElementById('jsum').textContent=n(jf)+' من ٣٠ جزء'+(cur?' • الجزء الحالي '+n(cur):'');
-  document.getElementById('code').value = encodeProgress();
-  var si = document.getElementById('storeinfo');
-  si.className = storageOk ? '' : 'warn';
-  si.textContent = storageOk ? 'التقدم بيتحفظ تلقائيًا على الجهاز ده كل ما تعلّم صفحة.' : 'المتصفح مش بيسمح بالحفظ التلقائي هنا. انسخ الكود تحت واحفظه، وارجع به تقدمك كل مرة.';
-
+  document.getElementById('code').value=encodeProgress();
+  var si=document.getElementById('storeinfo');
+  si.className=storageOk?'':'warn';
+  si.textContent=storageOk?'التقدم بيتحفظ تلقائيًا على الجهاز ده كل ما تعلّم صفحة.':'المتصفح مش بيسمح بالحفظ التلقائي هنا. انسخ الكود تحت واحفظه، وارجع به تقدمك كل مرة.';
   document.getElementById('reset').innerHTML = confirmReset
-    ? '<span>مسح كل التعليمات؟</span><button class="danger" data-reset="yes">نعم، امسح</button><button data-reset="no">إلغاء</button>'
-    : '<button data-reset="ask">ابدأ من جديد</button>';
+    ? '<span>مسح كل التعليمات؟</span><button class="danger" data-act="reset" data-r="yes">نعم، امسح</button><button data-act="reset" data-r="no">إلغاء</button>'
+    : '<button data-act="reset" data-r="ask">ابدأ من جديد</button>';
 }
 
+/* كود التقدم: ٦٠٤ بت (صفحة لكل بت) ثم base64 */
+function encodeProgress(){
+  var bytes=[], i, b, p;
+  for (i=0;i<76;i++){ b=0; for (var k=0;k<8;k++){ p=i*8+k+1; if (p<=604 && state.pages[p]) b|=(1<<k); } bytes.push(b); }
+  bytes.push(Math.min(state.khatmas,255), Math.min(state.goal,200));
+  return btoa(String.fromCharCode.apply(null, bytes));
+}
+function decodeProgress(txt){
+  var raw; try { raw=atob(String(txt).replace(/\s+/g,'')); } catch(e){ return null; }
+  if (raw.length!==76 && raw.length!==78) return null;
+  var pages={}; for (var i=0;i<76;i++){ var b=raw.charCodeAt(i); for (var k=0;k<8;k++){ var p=i*8+k+1; if (p<=604 && (b&(1<<k))) pages[p]=1; } }
+  var extra=null; if (raw.length===78){ extra={ khatmas:raw.charCodeAt(76), goal:raw.charCodeAt(77) }; }
+  return { pages:pages, extra:extra };
+}
+
+document.addEventListener('input', function(e){
+  if (e.target && e.target.id==='nameInput'){
+    state.name=e.target.value.trim(); save();
+    var w=document.getElementById('who'); w.textContent=state.name; w.hidden=!state.name;
+  }
+});
 document.addEventListener('click', function(e){
   var el=e.target.closest('button'); if(!el) return;
-  if (el.dataset.act==='copy'){
+  var act=el.dataset.act;
+  if (act==='view'){ state.view=el.dataset.view; save(); render(); return; }
+  if (act==='week'){ state.week=+el.dataset.week; save(); render(); return; }
+  if (act==='sub'){ state.sub=el.dataset.sub; save(); render(); return; }
+  if (act==='open'){ savedY=window.scrollY||0; detail={type:el.dataset.type,id:(el.dataset.type==='surah'?el.dataset.id:+el.dataset.id)}; render(); window.scrollTo(0,0); return; }
+  if (act==='back'){ detail=null; render(); window.scrollTo(0,savedY); return; }
+  if (act==='pg'){ toggleOne(+el.dataset.p); save(); render(); return; }
+  if (act==='cont'){ var cp=+el.dataset.p; savedY=window.scrollY||0; detail={type:'surah',id:surahOfPage(cp),focus:cp}; render(); return; }
+  if (act==='newk'){ state.khatmas++; state.pages={}; state.last=0; save(); render(); window.scrollTo(0,0); return; }
+  if (act==='dall'){ var r=rangeOf(detail.type,detail.id), st=count(r); setRange(r, st.done!==st.total); save(); render(); return; }
+  if (act==='all'){ var list=PLAN[state.week][+el.dataset.d], on=!dayStat(list).complete; for (var i=0;i<list.length;i++) setRange(rangeOf('surah',list[i]),on); save(); render(); return; }
+  if (act==='today'){
+    var td=document.querySelector('.day.today');
+    if(td){ var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches; td.scrollIntoView({block:'center',behavior:rm?'auto':'smooth'}); }
+    return;
+  }
+  if (act==='share'){
+    var url=location.href.split('#')[0];
+    if(!/^https?:/.test(url)){ say('افتح التطبيق من رابطه على الإنترنت أولًا عشان تشاركه'); return; }
+    var copyLink=function(){ try{ navigator.clipboard.writeText(url).then(function(){ say('اتنسخ رابط التطبيق، ابعته لأي حد'); },function(){ say(url); }); }catch(e){ say(url); } };
+    if (navigator.share){ navigator.share({title:'الورد اليومي للقرآن الكريم', url:url}).catch(function(err){ if(!err||err.name!=='AbortError') copyLink(); }); } else { copyLink(); }
+    return;
+  }
+  if (act==='copy'){
     var code=document.getElementById('code'), val=code.value;
     var fallback=function(){ code.removeAttribute('readonly'); code.select(); code.setSelectionRange(0,val.length); var ok=false; try{ ok=document.execCommand('copy'); }catch(e){} code.setAttribute('readonly',''); say(ok?'اتنسخ الكود':'حدد الكود وانسخه يدويًا'); };
     try { navigator.clipboard.writeText(val).then(function(){ say('اتنسخ الكود'); }, fallback); } catch(e){ fallback(); }
     return;
   }
-  if (el.dataset.act==='restore'){
-    var pages=decodeProgress(document.getElementById('paste').value);
+  if (act==='restore'){
+    var dec=decodeProgress(document.getElementById('paste').value), pages=dec&&dec.pages;
     if (!pages){ say('الكود مش صحيح، تأكد إنك نسخته كامل'); return; }
-    state.pages=pages; openKey=null; save(); render(); document.getElementById('paste').value=''; say('رجع تقدمك'); return;
+    state.pages=pages; state.last=0; if (dec.extra){ state.khatmas=dec.extra.khatmas; if (dec.extra.goal>=1) state.goal=dec.extra.goal; } save(); render(); document.getElementById('paste').value=''; say('رجع تقدمك'); return;
   }
-  if (el.dataset.week!==undefined){ state.week=+el.dataset.week; openKey=null; save(); render(); return; }
-  if (el.dataset.k){ openKey = openKey===el.dataset.k ? null : el.dataset.k; render(); return; }
-  if (el.dataset.p){ var pg=+el.dataset.p; if(state.pages[pg]) delete state.pages[pg]; else state.pages[pg]=1; save(); render(); return; }
-  if (el.dataset.sall){ var st=surahStat(el.dataset.sall); setPages([el.dataset.sall], st.done!==st.total); save(); render(); return; }
-  if (el.dataset.all!==undefined){ var list=PLAN[state.week][+el.dataset.all]; setPages(list, !dayStat(list).complete); save(); render(); return; }
-  if (el.dataset.reset){
-    if(el.dataset.reset==='ask') confirmReset=true;
-    else if(el.dataset.reset==='no') confirmReset=false;
-    else { state.pages={}; openKey=null; confirmReset=false; save(); }
+  if (act==='reset'){
+    if (el.dataset.r==='ask') confirmReset=true;
+    else if (el.dataset.r==='no') confirmReset=false;
+    else { state.pages={}; state.last=0; confirmReset=false; save(); }
     render(); return;
   }
 });
